@@ -5,6 +5,7 @@ ADD ./requirements.txt /GreaterWMS/requirements.txt
 COPY ./backend_start.sh /GreaterWMS/backend_start.sh
 #Configure working directory
 WORKDIR /GreaterWMS
+
 ENV port = ${port}
 #Installation foundation dependency
 #RUN sed -i 's/deb.debian.org/mirrors.aliyun.com/g' /etc/apt/sources.list
@@ -24,7 +25,7 @@ RUN pip3 install daphne
 RUN chmod +x /GreaterWMS/backend_start.sh
 CMD ["/GreaterWMS/backend_start.sh"]
 
-FROM --platform=linux/amd64 node:14.19.3-buster-slim AS front
+FROM --platform=linux/amd64 node:20.17.0-buster-slim AS front
 COPY ./templates/package.json /GreaterWMS/templates/package.json
 #COPY ./templates/node_modules/ /GreaterWMS/templates/node_modules/
 COPY ./web_start.sh /GreaterWMS/templates/web_start.sh
